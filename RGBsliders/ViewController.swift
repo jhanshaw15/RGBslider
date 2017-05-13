@@ -3,7 +3,7 @@
 //  RGBsliders
 //
 //  Created by Jeremy Hanshaw on 5/13/17.
-//  Copyright © 2017 Jeremy Hanshaw. All rights reserved.
+//  Copyright © 2017 Jeremy Hanshaw. All rights reserved...
 //
 
 import UIKit
