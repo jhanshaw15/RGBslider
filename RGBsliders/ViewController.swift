@@ -18,15 +18,36 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        //load defaults
+        let defaults = UserDefaults.standard
+        redSlider.value = defaults.float(forKey: "red")
+        greenSlider.value = defaults.float(forKey: "green")
+        blueSlider.value = defaults.float(forKey: "blue")
+        
         updateBackgroundColor(redSlider)
         colorSquare.layer.borderColor = UIColor.black.cgColor
         colorSquare.layer.borderWidth = 1
     }
+    
     @IBAction func updateBackgroundColor(_ sender: Any) {
         let red = CGFloat(redSlider.value)
         let green = CGFloat(greenSlider.value)
         let blue = CGFloat(blueSlider.value)
         colorSquare.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1)
+        
+        //update defaults
+        let defaults = UserDefaults.standard
+        defaults.set(redSlider.value, forKey: "red")
+        defaults.set(greenSlider.value, forKey: "green")
+        defaults.set(blueSlider.value, forKey: "blue")
+        defaults.synchronize()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "openColor") {
+            let newViewController = segue.destination
+            newViewController.view.backgroundColor = colorSquare.backgroundColor
+        }
     }
 
     override func didReceiveMemoryWarning() {
